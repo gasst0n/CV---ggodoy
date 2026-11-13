@@ -1,3 +1,6 @@
+<!-- ============================================== -->
+<!-- 🔝 TOP HEADER (Desktop Nav & Mobile Controls)  -->
+<!-- ============================================== -->
 <header
   class="fixed top-0 left-0 w-full h-20 z-40 bg-white/80 dark:bg-[#0b1220]/80 backdrop-blur-md border-b border-slate-200/80 dark:border-white/10 transition-colors duration-300"
 >
@@ -26,14 +29,28 @@
     <nav class="hidden lg:flex items-center gap-6 text-sm font-medium">
       <a
         href="#experience"
-        class="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+        (click)="scrollToSection('experience', $event)"
+        class="transition-colors py-1 px-2 rounded-lg"
+        [class.text-blue-600]="activeSection === 'experience'"
+        [class.dark:text-blue-400]="activeSection === 'experience'"
+        [class.font-semibold]="activeSection === 'experience'"
+        [class.text-slate-600]="activeSection !== 'experience'"
+        [class.dark:text-slate-300]="activeSection !== 'experience'"
+        [class.hover:text-blue-600]="activeSection !== 'experience'"
       >
         {{ i18n.t('navExperience') }}
       </a>
 
       <a
         href="#projects"
-        class="relative text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex items-center gap-1.5"
+        (click)="scrollToSection('projects', $event)"
+        class="relative transition-colors py-1 px-2 rounded-lg flex items-center gap-1.5"
+        [class.text-blue-600]="activeSection === 'projects'"
+        [class.dark:text-blue-400]="activeSection === 'projects'"
+        [class.font-semibold]="activeSection === 'projects'"
+        [class.text-slate-600]="activeSection !== 'projects'"
+        [class.dark:text-slate-300]="activeSection !== 'projects'"
+        [class.hover:text-blue-600]="activeSection !== 'projects'"
       >
         <span>{{ i18n.t('navProjects') }}</span>
         <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
@@ -43,21 +60,42 @@
 
       <a
         href="#skills"
-        class="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+        (click)="scrollToSection('skills', $event)"
+        class="transition-colors py-1 px-2 rounded-lg"
+        [class.text-blue-600]="activeSection === 'skills'"
+        [class.dark:text-blue-400]="activeSection === 'skills'"
+        [class.font-semibold]="activeSection === 'skills'"
+        [class.text-slate-600]="activeSection !== 'skills'"
+        [class.dark:text-slate-300]="activeSection !== 'skills'"
+        [class.hover:text-blue-600]="activeSection !== 'skills'"
       >
         {{ i18n.t('navSkills') }}
       </a>
 
       <a
         href="#education"
-        class="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+        (click)="scrollToSection('education', $event)"
+        class="transition-colors py-1 px-2 rounded-lg"
+        [class.text-blue-600]="activeSection === 'education'"
+        [class.dark:text-blue-400]="activeSection === 'education'"
+        [class.font-semibold]="activeSection === 'education'"
+        [class.text-slate-600]="activeSection !== 'education'"
+        [class.dark:text-slate-300]="activeSection !== 'education'"
+        [class.hover:text-blue-600]="activeSection !== 'education'"
       >
         {{ i18n.t('navEducation') }}
       </a>
 
       <a
         href="#contact"
-        class="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+        (click)="scrollToSection('contact', $event)"
+        class="transition-colors py-1 px-2 rounded-lg"
+        [class.text-blue-600]="activeSection === 'contact'"
+        [class.dark:text-blue-400]="activeSection === 'contact'"
+        [class.font-semibold]="activeSection === 'contact'"
+        [class.text-slate-600]="activeSection !== 'contact'"
+        [class.dark:text-slate-300]="activeSection !== 'contact'"
+        [class.hover:text-blue-600]="activeSection !== 'contact'"
       >
         {{ i18n.t('navContact') }}
       </a>
@@ -71,7 +109,7 @@
         role="switch"
         aria-label="Cambiar idioma"
         (click)="lang.toggle()"
-        class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 transition border border-slate-300 dark:border-white/10 flex items-center gap-1"
+        class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 transition border border-slate-300 dark:border-white/10 flex items-center gap-1 active:scale-95"
       >
         <span class="text-[10px] opacity-70">🌐</span>
         <span>{{ lang.current === 'es' ? 'EN' : 'ES' }}</span>
@@ -83,7 +121,7 @@
         role="switch"
         aria-label="Cambiar tema"
         (click)="theme.toggleTheme()"
-        class="p-2 text-xs rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 transition border border-slate-300 dark:border-white/10"
+        class="p-2 text-xs rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 transition border border-slate-300 dark:border-white/10 active:scale-95"
       >
         {{ theme.isDark() ? '☀️' : '🌙' }}
       </button>
@@ -91,6 +129,7 @@
       <!-- Botón Contactar Desktop -->
       <a
         href="#contact"
+        (click)="scrollToSection('contact', $event)"
         class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-blue-600 hover:bg-blue-700 text-white shadow-sm hover:shadow transition transform active:scale-95"
       >
         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -98,74 +137,121 @@
         </svg>
         <span>{{ i18n.t('ctaContact') }}</span>
       </a>
-
-      <!-- Mobile Hamburger Button -->
-      <button
-        type="button"
-        (click)="toggleMobileMenu()"
-        class="lg:hidden p-2 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10 transition"
-        aria-label="Menu"
-      >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            *ngIf="!mobileMenuOpen"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"
-          ></path>
-          <path
-            *ngIf="mobileMenuOpen"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"
-          ></path>
-        </svg>
-      </button>
     </div>
   </div>
+</header>
 
-  <!-- Mobile Dropdown Menu -->
+<!-- ======================================================== -->
+<!-- 📱 FLOATING BOTTOM NAVIGATION DOCK (Mobile & Tablet)     -->
+<!-- ======================================================== -->
+<nav
+  class="fixed bottom-4 inset-x-0 mx-auto w-fit z-40 lg:hidden pointer-events-auto animate-fade-up"
+  aria-label="Navegación móvil"
+>
   <div
-    *ngIf="mobileMenuOpen"
-    class="lg:hidden bg-white/95 dark:bg-[#0b1220]/95 backdrop-blur-xl border-b border-slate-200 dark:border-white/10 px-6 py-4 space-y-3 shadow-xl transition-all"
+    class="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-white/90 dark:bg-[#0b1220]/90 backdrop-blur-2xl border border-slate-200/90 dark:border-white/15 shadow-[0_12px_40px_rgba(0,0,0,0.35)]"
   >
+    <!-- Item 1: Experiencia -->
     <a
       href="#experience"
-      (click)="closeMobileMenu()"
-      class="block py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-blue-500"
+      (click)="scrollToSection('experience', $event)"
+      class="flex flex-col sm:flex-row items-center gap-1 px-3 py-1.5 rounded-full text-xs transition-all duration-300 active:scale-95"
+      [class.bg-blue-600]="activeSection === 'experience'"
+      [class.text-white]="activeSection === 'experience'"
+      [class.shadow-md]="activeSection === 'experience'"
+      [class.shadow-blue-500/25]="activeSection === 'experience'"
+      [class.text-slate-600]="activeSection !== 'experience'"
+      [class.dark:text-slate-400]="activeSection !== 'experience'"
+      [class.hover:text-slate-900]="activeSection !== 'experience'"
+      [class.dark:hover:text-white]="activeSection !== 'experience'"
     >
-      {{ i18n.t('navExperience') }}
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+      </svg>
+      <span class="text-[10px] sm:text-xs font-medium">{{ i18n.t('navExperience') }}</span>
     </a>
+
+    <!-- Item 2: Proyectos / CORPAT -->
     <a
       href="#projects"
-      (click)="closeMobileMenu()"
-      class="flex items-center justify-between py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-blue-500"
+      (click)="scrollToSection('projects', $event)"
+      class="relative flex flex-col sm:flex-row items-center gap-1 px-3 py-1.5 rounded-full text-xs transition-all duration-300 active:scale-95"
+      [class.bg-blue-600]="activeSection === 'projects'"
+      [class.text-white]="activeSection === 'projects'"
+      [class.shadow-md]="activeSection === 'projects'"
+      [class.shadow-blue-500/25]="activeSection === 'projects'"
+      [class.text-slate-600]="activeSection !== 'projects'"
+      [class.dark:text-slate-400]="activeSection !== 'projects'"
+      [class.hover:text-slate-900]="activeSection !== 'projects'"
+      [class.dark:hover:text-white]="activeSection !== 'projects'"
     >
-      <span>{{ i18n.t('navProjects') }}</span>
-      <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-blue-500/10 text-blue-500">CORPAT</span>
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+      </svg>
+      <span class="text-[10px] sm:text-xs font-medium">Proyectos</span>
+      <span class="w-1.5 h-1.5 rounded-full bg-blue-400 absolute top-1 right-2 sm:hidden" *ngIf="activeSection !== 'projects'"></span>
     </a>
+
+    <!-- Item 3: Skills -->
     <a
       href="#skills"
-      (click)="closeMobileMenu()"
-      class="block py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-blue-500"
+      (click)="scrollToSection('skills', $event)"
+      class="flex flex-col sm:flex-row items-center gap-1 px-3 py-1.5 rounded-full text-xs transition-all duration-300 active:scale-95"
+      [class.bg-blue-600]="activeSection === 'skills'"
+      [class.text-white]="activeSection === 'skills'"
+      [class.shadow-md]="activeSection === 'skills'"
+      [class.shadow-blue-500/25]="activeSection === 'skills'"
+      [class.text-slate-600]="activeSection !== 'skills'"
+      [class.dark:text-slate-400]="activeSection !== 'skills'"
+      [class.hover:text-slate-900]="activeSection !== 'skills'"
+      [class.dark:hover:text-white]="activeSection !== 'skills'"
     >
-      {{ i18n.t('navSkills') }}
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+      </svg>
+      <span class="text-[10px] sm:text-xs font-medium">{{ i18n.t('navSkills') }}</span>
     </a>
+
+    <!-- Item 4: Educación -->
     <a
       href="#education"
-      (click)="closeMobileMenu()"
-      class="block py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-blue-500"
+      (click)="scrollToSection('education', $event)"
+      class="flex flex-col sm:flex-row items-center gap-1 px-3 py-1.5 rounded-full text-xs transition-all duration-300 active:scale-95"
+      [class.bg-blue-600]="activeSection === 'education'"
+      [class.text-white]="activeSection === 'education'"
+      [class.shadow-md]="activeSection === 'education'"
+      [class.shadow-blue-500/25]="activeSection === 'education'"
+      [class.text-slate-600]="activeSection !== 'education'"
+      [class.dark:text-slate-400]="activeSection !== 'education'"
+      [class.hover:text-slate-900]="activeSection !== 'education'"
+      [class.dark:hover:text-white]="activeSection !== 'education'"
     >
-      {{ i18n.t('navEducation') }}
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
+        <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path>
+      </svg>
+      <span class="text-[10px] sm:text-xs font-medium">{{ i18n.t('navEducation') }}</span>
     </a>
+
+    <!-- Item 5: Contacto -->
     <a
       href="#contact"
-      (click)="closeMobileMenu()"
-      class="block py-2 text-sm font-medium text-blue-600 dark:text-blue-400 font-semibold"
+      (click)="scrollToSection('contact', $event)"
+      class="flex flex-col sm:flex-row items-center gap-1 px-3 py-1.5 rounded-full text-xs transition-all duration-300 active:scale-95"
+      [class.bg-blue-600]="activeSection === 'contact'"
+      [class.text-white]="activeSection === 'contact'"
+      [class.shadow-md]="activeSection === 'contact'"
+      [class.shadow-blue-500/25]="activeSection === 'contact'"
+      [class.text-slate-600]="activeSection !== 'contact'"
+      [class.dark:text-slate-400]="activeSection !== 'contact'"
+      [class.hover:text-slate-900]="activeSection !== 'contact'"
+      [class.dark:hover:text-white]="activeSection !== 'contact'"
     >
-      {{ i18n.t('navContact') }}
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+      </svg>
+      <span class="text-[10px] sm:text-xs font-medium">{{ i18n.t('navContact') }}</span>
     </a>
   </div>
-</header>
+</nav>
