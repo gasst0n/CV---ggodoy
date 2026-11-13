@@ -1,0 +1,68 @@
+<section id="education" class="px-4 sm:px-6 pt-16 pb-28 max-w-5xl mx-auto scroll-mt-24">
+  <!-- ENCABEZADO -->
+  <div class="text-center mb-16">
+    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 mb-3">
+      <span>🎓 Trayectoria Académica</span>
+    </div>
+    <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-slate-900 dark:text-white">
+      {{ i18n.t('educationTitle') }}
+    </h2>
+    <p class="max-w-2xl mx-auto text-slate-600 dark:text-slate-300 text-base sm:text-lg">
+      {{ i18n.t('educationSubtitle') }}
+    </p>
+  </div>
+
+  <!-- TARJETAS DE EDUCACIÓN -->
+  <div class="space-y-8">
+    <div
+      *ngFor="let edu of education; let i = index"
+      class="glass rounded-3xl p-6 sm:p-8 md:p-10 border border-slate-200/80 dark:border-white/5 shadow-xl transition-all duration-300 hover:shadow-2xl relative overflow-hidden"
+    >
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-200/60 dark:border-white/5">
+        <div class="flex items-center gap-4">
+          <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white p-2 shadow-sm border border-slate-100 flex-shrink-0 flex items-center justify-center">
+            <img
+              *ngIf="edu.logo"
+              [src]="edu.logo"
+              [alt]="i18n.t(edu.institutionKey)"
+              class="w-full h-full object-contain"
+            />
+          </div>
+
+          <div>
+            <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
+              {{ i18n.t(edu.degreeKey) }}
+            </h3>
+            <p class="text-sm sm:text-base font-semibold text-blue-600 dark:text-blue-400 mt-0.5">
+              {{ i18n.t(edu.institutionKey) }}
+            </p>
+          </div>
+        </div>
+
+        <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold bg-slate-100 dark:bg-white/10 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-white/10 self-start sm:self-center">
+          🗓️ {{ i18n.t(edu.periodKey) }}
+        </span>
+      </div>
+
+      <!-- DESCRIPCIÓN ACADÉMICA -->
+      <p *ngIf="edu.descriptionKey" class="text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed mb-6">
+        {{ i18n.t(edu.descriptionKey) }}
+      </p>
+
+      <!-- ÁREAS CLAVE APRENDIDAS -->
+      <div *ngIf="edu.skills.length">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">
+          Ejes de Formación y Competencias:
+        </h4>
+        <div class="flex flex-wrap gap-2">
+          <span
+            *ngFor="let s of edu.skills"
+            class="px-3 py-1 text-xs rounded-lg font-medium bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 border border-slate-200/60 dark:border-white/5"
+          >
+            {{ s }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

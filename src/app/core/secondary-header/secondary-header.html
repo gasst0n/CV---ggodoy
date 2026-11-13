@@ -1,0 +1,21 @@
+<div
+  class="fixed top-20 left-0 w-full z-30 transition-all duration-300 pointer-events-none"
+  [class.opacity-0]="!visible"
+  [class.-translate-y-4]="!visible"
+>
+  <div
+    class="max-w-6xl mx-auto px-4 py-2 pointer-events-auto"
+  >
+    <div class="glass rounded-full px-4 py-1.5 flex items-center justify-center gap-2 overflow-x-auto shadow-sm border border-slate-200/60 dark:border-white/10 no-scrollbar">
+      <span class="text-[11px] font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider whitespace-nowrap">Core Stack:</span>
+      <div class="flex items-center gap-1.5 whitespace-nowrap">
+        <span
+          *ngFor="let tech of personal.stack.slice(0, 8)"
+          class="px-2.5 py-0.5 text-[11px] font-medium rounded-full bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-white/5"
+        >
+          {{ tech }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

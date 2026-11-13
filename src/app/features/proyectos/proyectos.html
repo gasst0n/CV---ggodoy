@@ -1,0 +1,484 @@
+<section id="projects" class="px-4 sm:px-6 pt-16 pb-28 max-w-7xl mx-auto scroll-mt-24">
+  <!-- TÍTULO DE LA SECCIÓN -->
+  <div class="text-center mb-14">
+    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 mb-3">
+      <span>🚀 Portafolio de Soluciones</span>
+    </div>
+    <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-slate-900 dark:text-white">
+      {{ i18n.t('projectsTitle') }}
+    </h2>
+    <p class="max-w-2xl mx-auto text-slate-600 dark:text-slate-300 text-base sm:text-lg">
+      {{ i18n.t('projectsSubtitle') }}
+    </p>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 🌟 PROYECTO INSIGNIA: CORPAT (Correo Arg.) -->
+  <!-- ========================================== -->
+  <div class="mb-16">
+    <div class="glass rounded-3xl p-6 sm:p-8 md:p-10 border border-blue-500/30 dark:border-blue-500/20 shadow-2xl relative overflow-hidden">
+      <!-- Glow decorativo superior -->
+      <div class="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
+
+      <!-- Encabezado de CORPAT -->
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-8">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-sm mb-3">
+            <span>⭐ {{ i18n.t('corpatBadge') }}</span>
+          </div>
+          <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
+            {{ i18n.t(corpatProject.titleKey) }}
+          </h3>
+          <p class="text-sm sm:text-base text-blue-600 dark:text-blue-400 font-medium mt-1">
+            {{ i18n.t(corpatProject.contextKey) }} · Gestión de Activos & Operaciones
+          </p>
+        </div>
+
+        <!-- Botón Ver Detalles / Modal -->
+        <button
+          type="button"
+          (click)="openProjectModal(corpatProject, activeCorpatScreenIndex)"
+          class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold shadow-lg shadow-blue-500/20 transition transform active:scale-95 whitespace-nowrap self-start lg:self-center"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+          </svg>
+          <span>{{ i18n.t('modalOpenDetails') }}</span>
+        </button>
+      </div>
+
+      <!-- Resumen descriptivo -->
+      <p class="text-slate-700 dark:text-slate-300 text-base sm:text-lg leading-relaxed mb-8 max-w-5xl">
+        {{ i18n.t(corpatProject.shortDescKey) }}
+      </p>
+
+      <!-- Grid de 4 Métricas de CORPAT -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+        <div
+          *ngFor="let metric of corpatProject.metrics"
+          class="p-4 rounded-2xl bg-white/50 dark:bg-slate-900/50 border border-slate-200 dark:border-white/5 text-center"
+        >
+          <div class="text-lg sm:text-xl md:text-2xl font-extrabold text-blue-600 dark:text-blue-400 truncate">
+            {{ i18n.t(metric.valueKey) }}
+          </div>
+          <div class="text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 mt-1">
+            {{ i18n.t(metric.labelKey) }}
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- 📸 INTERACTIVE SCREENSHOT VIEWER FOR CORPAT   -->
+      <!-- ============================================== -->
+      <div class="mb-8">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+            {{ i18n.t('modalScreenshots') }} ({{ activeCorpatScreenIndex + 1 }} de {{ corpatProject.screenshots?.length }})
+          </span>
+          <span class="text-xs text-blue-500 font-medium hidden sm:inline">
+            {{ i18n.t('modalClickToZoom') }}
+          </span>
+        </div>
+
+        <!-- Visor principal con crossfade suave y navegación -->
+        <div
+          class="group relative rounded-2xl overflow-hidden border border-slate-300 dark:border-white/10 shadow-2xl bg-slate-950 cursor-pointer aspect-[16/9] md:aspect-[21/9]"
+          (click)="openProjectModal(corpatProject, activeCorpatScreenIndex)"
+        >
+          <!-- Contenedor con transición de crossfade entre capturas -->
+          <div
+            *ngFor="let screen of corpatProject.screenshots; let i = index"
+            class="absolute inset-0 transition-opacity duration-500 ease-in-out"
+            [class.opacity-100]="activeCorpatScreenIndex === i"
+            [class.opacity-0]="activeCorpatScreenIndex !== i"
+            [class.pointer-events-none]="activeCorpatScreenIndex !== i"
+          >
+            <img
+              [src]="screen.src"
+              [alt]="i18n.t(screen.titleKey)"
+              class="w-full h-full object-cover sm:object-contain transition-transform duration-700 group-hover:scale-[1.01]"
+            />
+          </div>
+
+          <!-- Botón de ampliar en hover -->
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
+            <span class="px-4 py-2 rounded-xl bg-black/75 text-white text-xs sm:text-sm font-semibold backdrop-blur-md border border-white/20 flex items-center gap-2 transform translate-y-2 group-hover:translate-y-0 transition duration-300 shadow-xl">
+              <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+              </svg>
+              {{ i18n.t('modalViewFull') }}
+            </span>
+          </div>
+
+          <!-- Botones prev / next -->
+          <button
+            type="button"
+            (click)="$event.stopPropagation(); prevCorpatScreen()"
+            class="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/60 hover:bg-black/90 text-white backdrop-blur-md border border-white/20 transition transform active:scale-95 z-20 hover:scale-105"
+            aria-label="Anterior"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+
+          <button
+            type="button"
+            (click)="$event.stopPropagation(); nextCorpatScreen()"
+            class="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/60 hover:bg-black/90 text-white backdrop-blur-md border border-white/20 transition transform active:scale-95 z-20 hover:scale-105"
+            aria-label="Siguiente"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
+
+          <!-- Banner inferior con info de la captura -->
+          <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/95 via-black/70 to-transparent p-4 sm:p-5 text-white pointer-events-none z-10">
+            <h4 class="text-sm sm:text-base font-bold flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+              {{ i18n.t(corpatProject.screenshots?.[activeCorpatScreenIndex]?.titleKey!) }}
+            </h4>
+            <p class="text-xs sm:text-sm text-slate-300 mt-1 max-w-3xl line-clamp-2">
+              {{ i18n.t(corpatProject.screenshots?.[activeCorpatScreenIndex]?.descKey!) }}
+            </p>
+          </div>
+        </div>
+
+        <!-- 4 Miniaturas / Tabs de selección -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
+          <button
+            type="button"
+            *ngFor="let screen of corpatProject.screenshots; let i = index"
+            (click)="selectCorpatScreen(i)"
+            class="group text-left p-2.5 rounded-xl border transition-all text-xs"
+            [class.border-blue-500]="activeCorpatScreenIndex === i"
+            [class.bg-blue-500/10]="activeCorpatScreenIndex === i"
+            [class.border-slate-200]="activeCorpatScreenIndex !== i"
+            [class.dark:border-white/10]="activeCorpatScreenIndex !== i"
+            [class.hover:border-blue-400]="activeCorpatScreenIndex !== i"
+          >
+            <div class="aspect-[16/9] rounded-lg overflow-hidden mb-2 bg-slate-900 border border-slate-200 dark:border-white/5">
+              <img
+                [src]="screen.src"
+                [alt]="i18n.t(screen.titleKey)"
+                class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              />
+            </div>
+            <div class="font-semibold text-slate-900 dark:text-white truncate">
+              {{ i18n.t(screen.titleKey) }}
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Stack de CORPAT -->
+      <div>
+        <h5 class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">
+          Stack Tecnológico Utilizado:
+        </h5>
+        <div class="flex flex-wrap gap-2">
+          <span
+            *ngFor="let tech of corpatProject.stack"
+            class="px-3 py-1 text-xs rounded-lg font-medium bg-slate-100 dark:bg-white/10 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-white/5"
+          >
+            {{ tech }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 💼 OTROS PROYECTOS EMPRESARIALES           -->
+  <!-- ========================================== -->
+  <div class="grid md:grid-cols-2 gap-8">
+    <div
+      *ngFor="let project of otherProjects"
+      class="glass rounded-3xl p-6 sm:p-8 flex flex-col justify-between border border-slate-200/80 dark:border-white/5 shadow-md hover:border-blue-500/30 transition-all duration-300"
+    >
+      <div>
+        <div class="flex items-start justify-between gap-4 mb-4">
+          <div>
+            <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
+              {{ i18n.t(project.titleKey) }}
+            </h3>
+            <p class="text-xs sm:text-sm text-blue-600 dark:text-blue-400 font-medium mt-1">
+              {{ i18n.t(project.contextKey) }}
+            </p>
+          </div>
+
+          <button
+            type="button"
+            (click)="openProjectModal(project)"
+            class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 transition"
+            title="Ver detalles"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </button>
+        </div>
+
+        <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+          {{ i18n.t(project.shortDescKey) }}
+        </p>
+
+        <!-- Arquitectura preview -->
+        <div *ngIf="project.architecture" class="space-y-2 mb-6 p-4 rounded-xl bg-slate-100/50 dark:bg-white/5 text-xs">
+          <div *ngFor="let arch of project.architecture" class="flex flex-col sm:flex-row sm:items-baseline gap-1">
+            <span class="font-semibold text-slate-700 dark:text-slate-300 sm:w-28 flex-shrink-0">• {{ arch.label }}:</span>
+            <span class="text-slate-600 dark:text-slate-400">{{ arch.value }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span
+            *ngFor="let tech of project.stack"
+            class="px-2.5 py-1 text-xs rounded-md bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-slate-300 font-medium border border-slate-200 dark:border-white/5"
+          >
+            {{ tech }}
+          </span>
+        </div>
+
+        <button
+          type="button"
+          (click)="openProjectModal(project)"
+          class="w-full py-2.5 px-4 rounded-xl border border-blue-500/30 hover:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-semibold transition text-center"
+        >
+          {{ i18n.t('modalOpenDetails') }} →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- 🔍 MODAL INTERACTIVO DE DETALLES Y CAPTURAS DEL PROYECTO -->
+  <!-- ======================================================== -->
+  <div
+    *ngIf="isModalOpen && modalProject"
+    class="fixed inset-0 z-[70] flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md animate-fade-up overflow-y-auto"
+    (click)="closeModal()"
+  >
+    <div
+      class="relative w-full max-w-4xl max-h-[92vh] flex flex-col rounded-3xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-white/15 shadow-2xl overflow-hidden my-auto"
+      (click)="$event.stopPropagation()"
+    >
+      <!-- HEADER DEL MODAL -->
+      <div class="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-900/50">
+        <div>
+          <span *ngIf="modalProject.badgeKey" class="inline-block text-[10px] font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">
+            {{ i18n.t(modalProject.badgeKey) }}
+          </span>
+          <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+            {{ i18n.t(modalProject.titleKey) }}
+          </h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400">
+            {{ i18n.t(modalProject.contextKey) }}
+          </p>
+        </div>
+
+        <!-- Botón cerrar (X) -->
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-white/10 text-slate-500 hover:text-slate-800 dark:hover:text-white transition"
+          aria-label="Cerrar modal"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- CONTENIDO SCROLLABLE DEL MODAL -->
+      <div class="p-6 overflow-y-auto space-y-8">
+        <!-- SECCIÓN DE CAPTURAS SI TIENE -->
+        <div *ngIf="modalProject.screenshots?.length" class="space-y-4">
+          <div class="flex items-center justify-between">
+            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+              <span>📸 {{ i18n.t('modalScreenshots') }}</span>
+              <span class="text-xs font-normal text-slate-500">
+                ({{ activeModalScreenIndex + 1 }}/{{ modalProject.screenshots?.length }})
+              </span>
+            </h4>
+
+            <button
+              type="button"
+              (click)="toggleImageZoom()"
+              class="text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
+            >
+              <span>🔍 {{ i18n.t('modalViewFull') }}</span>
+            </button>
+          </div>
+
+          <!-- Imagen Activa en el Modal con crossfade -->
+          <div class="relative rounded-2xl overflow-hidden bg-slate-950 border border-slate-300 dark:border-white/10 aspect-[16/9] shadow-lg">
+            <div
+              *ngFor="let screen of modalProject.screenshots; let idx = index"
+              class="absolute inset-0 transition-opacity duration-300 ease-in-out"
+              [class.opacity-100]="activeModalScreenIndex === idx"
+              [class.opacity-0]="activeModalScreenIndex !== idx"
+              [class.pointer-events-none]="activeModalScreenIndex !== idx"
+            >
+              <img
+                [src]="screen.src"
+                [alt]="i18n.t(screen.titleKey)"
+                class="w-full h-full object-contain cursor-zoom-in"
+                (click)="toggleImageZoom()"
+              />
+            </div>
+
+            <!-- Botones Prev/Next en Modal -->
+            <button
+              type="button"
+              (click)="prevModalScreen()"
+              class="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/60 hover:bg-black/90 text-white backdrop-blur border border-white/20 transition hover:scale-105 z-10"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+              </svg>
+            </button>
+
+            <button
+              type="button"
+              (click)="nextModalScreen()"
+              class="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/60 hover:bg-black/90 text-white backdrop-blur border border-white/20 transition hover:scale-105 z-10"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Título y detalle de la captura seleccionada -->
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-white/5">
+            <h5 class="text-sm font-bold text-slate-900 dark:text-white">
+              {{ i18n.t(modalProject.screenshots?.[activeModalScreenIndex]?.titleKey!) }}
+            </h5>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+              {{ i18n.t(modalProject.screenshots?.[activeModalScreenIndex]?.descKey!) }}
+            </p>
+          </div>
+
+          <!-- Thumbnails en Modal -->
+          <div class="grid grid-cols-4 gap-2">
+            <button
+              type="button"
+              *ngFor="let screen of modalProject.screenshots; let idx = index"
+              (click)="selectModalScreen(idx)"
+              class="rounded-xl overflow-hidden border-2 transition aspect-[16/9] bg-slate-900"
+              [class.border-blue-500]="activeModalScreenIndex === idx"
+              [class.border-transparent]="activeModalScreenIndex !== idx"
+              [class.opacity-60]="activeModalScreenIndex !== idx"
+            >
+              <img
+                [src]="screen.src"
+                [alt]="i18n.t(screen.titleKey)"
+                class="w-full h-full object-cover"
+              />
+            </button>
+          </div>
+        </div>
+
+        <!-- DESCRIPCIÓN COMPLETA DEL CV -->
+        <div>
+          <h4 class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
+            {{ i18n.t('modalImpact') }}
+          </h4>
+          <p class="text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line">
+            {{ i18n.t(modalProject.longDescKey) }}
+          </p>
+        </div>
+
+        <!-- ARQUITECTURA TÉCNICA -->
+        <div *ngIf="modalProject.architecture?.length">
+          <h4 class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">
+            {{ i18n.t('modalArchitecture') }}
+          </h4>
+          <div class="grid sm:grid-cols-2 gap-3">
+            <div
+              *ngFor="let arch of modalProject.architecture"
+              class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-white/5"
+            >
+              <div class="text-xs font-bold text-blue-600 dark:text-blue-400 mb-0.5">
+                {{ arch.label }}
+              </div>
+              <div class="text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+                {{ arch.value }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STACK DE TECNOLOGÍAS COMPLETO -->
+        <div>
+          <h4 class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">
+            Tecnologías y Frameworks
+          </h4>
+          <div class="flex flex-wrap gap-2">
+            <span
+              *ngFor="let tech of modalProject.stack"
+              class="px-3 py-1 text-xs rounded-lg font-medium bg-blue-500/10 text-blue-700 dark:text-blue-300 border border-blue-500/20"
+            >
+              {{ tech }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOOTER DEL MODAL -->
+      <div class="flex items-center justify-end px-6 py-4 border-t border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-900/50">
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="px-5 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 dark:bg-white/10 dark:hover:bg-white/15 text-slate-800 dark:text-white text-sm font-medium transition"
+        >
+          {{ i18n.t('modalClose') }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- 🔍 LIGHTBOX DE ZOOM PANTALLA COMPLETA         -->
+  <!-- ============================================== -->
+  <div
+    *ngIf="isImageZoomed && modalProject?.screenshots?.length"
+    class="fixed inset-0 z-[80] bg-black/95 flex flex-col items-center justify-center p-4"
+    (click)="toggleImageZoom()"
+  >
+    <!-- Botón Cerrar Zoom -->
+    <button
+      type="button"
+      (click)="toggleImageZoom()"
+      class="absolute top-5 right-5 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition z-10"
+      aria-label="Cerrar zoom"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+
+    <div class="relative max-w-6xl w-full max-h-[85vh] flex items-center justify-center">
+      <img
+        [src]="modalProject?.screenshots?.[activeModalScreenIndex]?.src"
+        [alt]="i18n.t(modalProject?.screenshots?.[activeModalScreenIndex]?.titleKey!)"
+        class="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl"
+        (click)="$event.stopPropagation()"
+      />
+    </div>
+
+    <div class="mt-4 text-center text-white" (click)="$event.stopPropagation()">
+      <h5 class="text-base font-bold">
+        {{ i18n.t(modalProject?.screenshots?.[activeModalScreenIndex]?.titleKey!) }}
+      </h5>
+      <p class="text-xs text-slate-400 mt-1">
+        {{ i18n.t('modalCloseImage') }} (o presiona ESC)
+      </p>
+    </div>
+  </div>
+</section>

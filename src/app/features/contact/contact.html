@@ -1,0 +1,91 @@
+<section id="contact" class="px-4 sm:px-6 pt-16 pb-32 max-w-4xl mx-auto scroll-mt-24">
+  <!-- ENCABEZADO -->
+  <div class="text-center mb-16">
+    <div
+      class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 mb-3">
+      <span>📬 Contacto Profesional</span>
+    </div>
+    <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-slate-900 dark:text-white">
+      {{ i18n.t('contactTitle') }}
+    </h2>
+    <p class="max-w-2xl mx-auto text-slate-600 dark:text-slate-300 text-base sm:text-lg">
+      {{ i18n.t('contactSubtitle') }}
+    </p>
+  </div>
+
+  <!-- GRID DE CANALES DE CONTACTO (LinkedIn y Email) -->
+  <div class="grid sm:grid-cols-2 gap-6 mb-10 max-w-3xl mx-auto">
+    <!-- LINKEDIN -->
+    <div
+      class="glass rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-white/5 shadow-xl flex flex-col justify-between hover:border-[#0A66C2]/40 transition group">
+      <div>
+        <div
+          class="w-14 h-14 rounded-2xl bg-[#0A66C2]/10 text-[#0A66C2] flex items-center justify-center mb-5 group-hover:scale-110 transition">
+          <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1">
+          LinkedIn
+        </h3>
+        <p class="text-xs text-slate-500 mb-4">Conectemos en mi red profesional</p>
+        <p class="text-xs font-mono text-slate-600 dark:text-slate-400 break-all mb-8">
+          in/gastoneliasgodoy
+        </p>
+      </div>
+
+      <a [href]="contact.linkedin" target="_blank" rel="noopener noreferrer"
+        class="w-full py-3 px-5 rounded-xl bg-[#0A66C2] hover:bg-[#004182] text-white text-xs sm:text-sm font-semibold shadow-md shadow-[#0A66C2]/20 transition text-center">
+        {{ i18n.t('contactLinkedIn') }} →
+      </a>
+    </div>
+
+    <!-- CORREO ELECTRÓNICO -->
+    <div
+      class="glass rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-white/5 shadow-xl flex flex-col justify-between hover:border-blue-500/40 transition group">
+      <div>
+        <div
+          class="w-14 h-14 rounded-2xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-5 group-hover:scale-110 transition">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+            </path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1">
+          Email
+        </h3>
+        <p class="text-xs text-slate-500 mb-4">Para propuestas formales y entrevistas</p>
+        <p class="text-xs font-mono text-slate-600 dark:text-slate-400 break-all mb-8">
+          {{ contact.email }}
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-2.5">
+        <a [href]="'mailto:' + contact.email"
+          class="w-full py-3 px-5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold shadow-md shadow-blue-600/20 transition text-center">
+          {{ i18n.t('contactEmail') }} →
+        </a>
+
+        <button type="button" (click)="copyEmail()"
+          class="w-full py-2.5 px-4 rounded-xl border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 text-slate-700 dark:text-slate-200 text-xs font-medium transition">
+          {{ copiedEmail ? i18n.t('copiedEmail') : i18n.t('ctaCopyEmail') }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TARJETA DE UBICACIÓN GENERAL -->
+  <div
+    class="glass rounded-3xl p-6 sm:p-7 border border-slate-200/80 dark:border-white/5 shadow-xl text-center max-w-3xl mx-auto">
+    <div class="inline-flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 mb-1">
+      <span class="text-base">📍</span>
+      <span class="font-semibold text-slate-900 dark:text-white">{{ i18n.t('contactLocation') }}:</span>
+      <span>{{ i18n.t('contactLocationVal') }}</span>
+    </div>
+    <p class="text-xs sm:text-sm text-slate-500">
+      Disponible para modalidades híbridas y remotas.
+    </p>
+  </div>
+</section>

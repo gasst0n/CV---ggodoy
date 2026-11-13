@@ -1,0 +1,32 @@
+export const PERSONAL_DATA = {
+  name: 'Gastón Elias Godoy',
+  role: 'Analista Técnico-Funcional | Full Stack Developer | Integraciones IT',
+  shortDescription:
+    'Analista Técnico-Funcional y Desarrollador Full Stack con experiencia en el diseño de arquitecturas basadas en APIs REST, gobierno de identidades (IAM) y desarrollo web con TypeScript, Angular y NestJS. Enfocado en construir soluciones robustas que conectan plataformas empresariales y automatizan flujos de trabajo críticos.',
+  location: 'Buenos Aires, Argentina',
+  email: 'gasst0n14@gmail.com',
+  links: {
+    linkedin: 'https://linkedin.com/in/gastoneliasgodoy/',
+    email: 'mailto:gasst0n14@gmail.com',
+  },
+  stack: [
+    'Angular',
+    'NestJS',
+    'TypeScript',
+    'Node.js',
+    'MongoDB',
+    'APIs REST',
+    'Docker',
+    'Ubuntu Server',
+    'AWS Cloud',
+    'C# / .NET',
+    'SQL Server',
+    'PostgreSQL',
+    'SOTI MDM',
+    'IAM / MidPoint',
+    'Kafka',
+    'Tailwind CSS',
+    'Git',
+    'Scrum',
+  ],
+};
